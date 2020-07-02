@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.compileSdkVersion
 
 
     defaultConfig {
         applicationId "com.example.android.movies"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -23,14 +24,34 @@ android {
         }
     }
 
+
+    viewBinding.enabled = true
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.core:core-ktx:$androidXVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.cardview:cardview:$cardViewVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation "org.koin:koin-android-viewmodel:$rootProject.koinVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit2"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.gson"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleKtxVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodelKtxVersion"
+
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

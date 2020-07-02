@@ -6,6 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".views.HomeActivity">
 
-    
+    <TextView
+        android:id="@+id/textView"
+        style="@style/home_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/title_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_movies_genres"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:listitem="@layout/item_genre"/>
+
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <include layout="@layout/layout_empty"
+        android:id="@+id/layout_empty"
+        android:visibility="gone"/>
+
+    <include layout="@layout/layout_error"
+        android:id="@+id/layout_error"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
