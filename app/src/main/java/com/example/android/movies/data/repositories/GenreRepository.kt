@@ -1,8 +1,10 @@
-package com.example.android.movies.data
+package com.example.android.movies.data.repositories
 
 import android.util.Log
+import com.example.android.movies.data.ApiClient
+import com.example.android.movies.data.OperationResult
 import com.example.android.movies.models.Genre
-import com.example.android.movies.models.interfaces.IMoviesGenresRetrieve
+import com.example.android.movies.bl.IMoviesGenresRetrieve
 import java.lang.Exception
 
 class GenreRepository: IMoviesGenresRetrieve {
@@ -15,10 +17,14 @@ class GenreRepository: IMoviesGenresRetrieve {
                     OperationResult.Success(data)
                 }else{
                     val message = it.body()?.status_message
-                    OperationResult.Error(Exception(message))
+                    OperationResult.Error(
+                        Exception(message)
+                    )
                 }
             }?:run{
-                return OperationResult.Error(Exception("Ocurrió un error"))
+                return OperationResult.Error(
+                    Exception("Ocurrió un error")
+                )
             }
         }catch (e: Exception){
             Log.e("ExceptionRepo", e.message)

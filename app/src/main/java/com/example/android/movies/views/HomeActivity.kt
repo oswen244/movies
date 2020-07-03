@@ -21,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding  = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setupObservers()
         setupUI()
 
@@ -54,9 +55,16 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        adapter = GenreAdapter(genreViewModel.genreList.value!!)
+        adapter = GenreAdapter(genreViewModel.genreList.value!!){
+            openListByGenre(it.id.toString(), it.name)
+        }
         binding.rvMoviesGenres.layoutManager = LinearLayoutManager(this)
         binding.rvMoviesGenres.adapter = adapter
+    }
+
+    private fun openListByGenre(genreId: String, genreName: String){
+        val intent = MovieListActivity.newInstance(this, genreId, genreName)
+        startActivity(intent)
     }
 
     override fun onResume() {

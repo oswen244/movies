@@ -9,13 +9,16 @@ import com.example.android.movies.R
 import com.example.android.movies.models.Genre
 import kotlinx.android.synthetic.main.item_genre.view.*
 
-class GenreAdapter(var genreList: List<Genre>): RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
+class GenreAdapter(var genreList: List<Genre>, private val listener: (Genre) -> Unit): RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
 
     class GenreViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val tvGenreName: TextView = view.tv_genre
 
-        fun bind(genre: Genre?){
-            tvGenreName.text = genre?.name
+        fun bind(genre: Genre, listener: (Genre) -> Unit) = with(itemView){
+            tvGenreName.text = genre.name
+            setOnClickListener {
+                listener(genre)
+            }
         }
     }
 
@@ -27,7 +30,7 @@ class GenreAdapter(var genreList: List<Genre>): RecyclerView.Adapter<GenreAdapte
     override fun getItemCount(): Int = genreList.size
 
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
-        holder.bind(genreList.get(position))
+        holder.bind(genreList.get(position), listener)
     }
 
     fun updateList(newGenreList: List<Genre>){
