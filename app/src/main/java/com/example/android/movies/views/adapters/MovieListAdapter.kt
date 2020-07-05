@@ -12,7 +12,7 @@ import com.example.android.movies.models.MovieList
 import com.example.android.movies.utils.Constants
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieListAdapter(var movieList: List<MovieList>, private val listener: (MovieList) -> Unit): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
+class MovieListAdapter(var movieList: ArrayList<MovieList>, private val listener: (MovieList) -> Unit): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
 
     class MovieListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val movieImage: ImageView = itemView.iv_movie_image
@@ -40,8 +40,18 @@ class MovieListAdapter(var movieList: List<MovieList>, private val listener: (Mo
         holder.bind(movieList[position], listener)
     }
 
-    fun update(newList: List<MovieList>){
+    fun update(newList: ArrayList<MovieList>){
         movieList = newList
         notifyDataSetChanged()
+    }
+
+    fun addToList(movies: List<MovieList>) {
+        val prevCount = itemCount
+        this.movieList.addAll(movies)
+        if (prevCount > movies.size) {
+            notifyDataSetChanged()
+        } else {
+            notifyItemRangeInserted(prevCount, movies.size)
+        }
     }
 }

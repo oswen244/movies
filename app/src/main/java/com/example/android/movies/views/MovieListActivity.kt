@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.movies.R
 import com.example.android.movies.databinding.ActivityMovieListBinding
+import com.example.android.movies.models.MovieList
+import com.example.android.movies.utils.EndlessScrollViewListener
 import com.example.android.movies.utils.Methods
 import com.example.android.movies.viewmodels.MovieListViewModel
 import com.example.android.movies.views.adapters.MovieListAdapter
@@ -19,6 +23,8 @@ class MovieListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieListBinding
     private val movieListViewModel: MovieListViewModel by viewModel<MovieListViewModel>()
     private lateinit var adapter: MovieListAdapter
+    private lateinit var endlessScrollListener: EndlessScrollViewListener
+    private var START_PAGE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +34,14 @@ class MovieListActivity : AppCompatActivity() {
         setupObservers()
         setupUI()
 
-        movieListViewModel.loadMoviesByGenre(genreId)
+        movieListViewModel.loadMoviesByGenre(genreId, START_PAGE)
     }
 
     private fun setupObservers() {
         movieListViewModel.movieList.observe(this, Observer {
             binding.layoutEmpty.root.visibility = View.GONE
             binding.layoutError.root.visibility = View.GONE
-            adapter.update(it)
+            adapter.addToList(it as ArrayList<MovieList>)
         })
 
         movieListViewModel.isViewLoading.observe(this, Observer {
@@ -67,11 +73,23 @@ class MovieListActivity : AppCompatActivity() {
             finish()
         }
 
-        adapter = MovieListAdapter(movieListViewModel.movieList.value!!){
+        adapter = MovieListAdapter((movieListViewModel.movieList.value as ArrayList<MovieList>?)!!){
             val intent = MovieDetailActivity.newInstance(this, it.title, it.id)
             startActivity(intent)
         }
-        binding.rvMovies.layoutManager = LinearLayoutManager(this)
+
+        binding.rvMovies.setHasFixedSize(true)
+        binding.rvMovies.itemAnimator = DefaultItemAnimator()
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvMovies.layoutManager = layoutManager
+        endlessScrollListener = object : EndlessScrollViewListener(layoutManager, START_PAGE){
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                if(page <= movieListViewModel.maxPages.value!!){
+                    movieListViewModel.loadMoviesByGenre(genreId, page)
+                }
+            }
+        }
+        binding.rvMovies.addOnScrollListener(endlessScrollListener)
         binding.rvMovies.adapter = adapter
     }
 
