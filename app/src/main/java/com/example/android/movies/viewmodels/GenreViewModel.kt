@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android.movies.data.OperationResult
+import com.example.android.movies.data.OperationResultList
 import com.example.android.movies.models.Genre
 import com.example.android.movies.bl.IMoviesGenresRetrieve
 import kotlinx.coroutines.Dispatchers
@@ -28,21 +28,21 @@ class GenreViewModel(private val repository: IMoviesGenresRetrieve): ViewModel()
     fun loadMovieGenres(){
         _isViewLoading.postValue(true)
         viewModelScope.launch {
-            val result: OperationResult<Genre> = withContext(Dispatchers.IO){
+            val resultList: OperationResultList<Genre> = withContext(Dispatchers.IO){
                 repository.retrieveMuseums()
             }
             _isViewLoading.postValue(false)
-            when(result){
-                is OperationResult.Success -> {
-                    if(result.data.isNullOrEmpty()){
+            when(resultList){
+                is OperationResultList.Success -> {
+                    if(resultList.data.isNullOrEmpty()){
                         _isEmptyList.postValue(true)
                     }else{
-                        _genreList.value = result.data
+                        _genreList.value = resultList.data
                     }
                 }
-                is OperationResult.Error -> {
+                is OperationResultList.Error -> {
                     Log.e("ErrorGenres", "OperationResult.error")
-                    _onMessageError.postValue(result.exception)
+                    _onMessageError.postValue(resultList.exception)
                 }
             }
         }

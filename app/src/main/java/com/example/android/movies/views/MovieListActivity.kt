@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.movies.R
 import com.example.android.movies.databinding.ActivityMovieListBinding
+import com.example.android.movies.utils.Methods
 import com.example.android.movies.viewmodels.MovieListViewModel
 import com.example.android.movies.views.adapters.MovieListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -44,6 +45,7 @@ class MovieListActivity : AppCompatActivity() {
 
         movieListViewModel.isEmptyList.observe(this, Observer {
             if(it){
+                binding.layoutEmpty.tvEmptyList.text = getString(R.string.empty_list_movies)
                 binding.layoutEmpty.root.visibility = View.VISIBLE
                 binding.layoutError.root.visibility = View.GONE
             }else{
@@ -58,11 +60,19 @@ class MovieListActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        adapter = MovieListAdapter(movieListViewModel.movieList.value!!)
+        setSupportActionBar(binding.include.toolbar)
+        Methods.setupToolbar(this, binding.include.toolbar, genreName, supportActionBar)
+
+        binding.include.toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
+        adapter = MovieListAdapter(movieListViewModel.movieList.value!!){
+            val intent = MovieDetailActivity.newInstance(this, it.title, it.id)
+            startActivity(intent)
+        }
         binding.rvMovies.layoutManager = LinearLayoutManager(this)
         binding.rvMovies.adapter = adapter
-
-        binding.include.tvHeader.text = genreName
     }
 
     companion object{

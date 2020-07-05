@@ -12,17 +12,20 @@ import com.example.android.movies.models.MovieList
 import com.example.android.movies.utils.Constants
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieListAdapter(var movieList: List<MovieList>): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
+class MovieListAdapter(var movieList: List<MovieList>, private val listener: (MovieList) -> Unit): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
 
     class MovieListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val movieImage: ImageView = itemView.iv_movie_image
         private val movieTitle: TextView = itemView.tv_movie_title
         private val movieRate: TextView = itemView.tv_movie_rate
 
-        fun bind(movie:MovieList){
+        fun bind(movie:MovieList, listener: (MovieList) -> Unit) = with(itemView){
             Glide.with(itemView.context).load(Constants.IMAGES+movie.backdrop_path).into(movieImage)
             movieTitle.text = movie.title
             movieRate.text = movie.vote_average.toString()
+            setOnClickListener {
+                listener(movie)
+            }
         }
     }
 
@@ -34,7 +37,7 @@ class MovieListAdapter(var movieList: List<MovieList>): RecyclerView.Adapter<Mov
     override fun getItemCount(): Int = movieList.size
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
-        holder.bind(movieList[position])
+        holder.bind(movieList[position], listener)
     }
 
     fun update(newList: List<MovieList>){

@@ -2,5 +2,7 @@
     <string name="app_name">Movies</string>
     <string name="title_home">Movies</string>
     <string name="empty_list_genre">No hay géneros en este momento</string>
+    <string name="empty_list_movies">No hay Peliculas para mostrar</string>
     <string name="error_list_genre">Hubo un error al cargar la lista</string>
+    <string name="about_the_movie">Overview</string>
 </resources>

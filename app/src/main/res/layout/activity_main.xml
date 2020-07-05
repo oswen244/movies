@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@color/colorPrimary"
+        android:elevation="@dimen/small_space"
+        android:translationZ="@dimen/lil_space"
         android:gravity="center"
         android:text="@string/title_home"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,8 @@
 package com.example.android.movies.data
 
 import com.example.android.movies.models.GenreResponse
+import com.example.android.movies.models.MovieDetail
+import com.example.android.movies.models.MovieDetailResponse
 import com.example.android.movies.models.MovieListByGenreResponse
 import com.example.android.movies.utils.Constants.APIKEY
 import com.example.android.movies.utils.Constants.URL
@@ -10,6 +12,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 object ApiClient {
@@ -43,6 +46,9 @@ object ApiClient {
 
         @GET("discover/movie${APIKEY}")
         suspend fun moviesByGenre(@Query("with_genres") genre_id: String): Response<MovieListByGenreResponse>
+
+        @GET("movie/{movie_id}${APIKEY}")
+        suspend fun movieDetail(@Path("movie_id") movie_id: Int): Response<MovieDetailResponse>
     }
 
 }

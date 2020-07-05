@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.movies.bl.IMovieRetrieve
-import com.example.android.movies.data.OperationResult
-import com.example.android.movies.data.repositories.MovieListRepository
+import com.example.android.movies.data.OperationResultList
 import com.example.android.movies.models.MovieList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,21 +28,21 @@ class MovieListViewModel(private val repository: IMovieRetrieve): ViewModel() {
     fun loadMoviesByGenre(genreId: String){
         _isViewLoading.postValue(true)
         viewModelScope.launch {
-            val result: OperationResult<MovieList> = withContext(Dispatchers.IO){
+            val resultList: OperationResultList<MovieList> = withContext(Dispatchers.IO){
                 repository.retrieveMovies(genreId)
             }
             _isViewLoading.postValue(false)
-            when(result){
-                is OperationResult.Success -> {
-                    if(result.data.isNullOrEmpty()){
+            when(resultList){
+                is OperationResultList.Success -> {
+                    if(resultList.data.isNullOrEmpty()){
                         _isEmptyList.postValue(true)
                     }else{
-                        _movieList.value = result.data
+                        _movieList.value = resultList.data
                     }
                 }
-                is OperationResult.Error -> {
+                is OperationResultList.Error -> {
                     Log.e("ErrorMovies", "OperationResult.error")
-                    _onMessageError.postValue(result.exception)
+                    _onMessageError.postValue(resultList.exception)
                 }
             }
         }
