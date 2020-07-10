@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestListener
 import com.example.android.movies.R
 import com.example.android.movies.models.MovieList
 import com.example.android.movies.utils.Constants
+import com.example.android.movies.utils.Methods
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieListAdapter(var movieList: ArrayList<MovieList>, private val listener: (MovieList) -> Unit): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
@@ -23,10 +24,11 @@ class MovieListAdapter(var movieList: ArrayList<MovieList>, private val listener
         private val movieImage: ImageView = itemView.iv_movie_image
         private val movieTitle: TextView = itemView.tv_movie_title
         private val movieRate: TextView = itemView.tv_movie_rate
-        private val loader: RelativeLayout = itemView.rl_loading_image
+        //private val loader: RelativeLayout = itemView.rl_loading_image
 
         fun bind(movie:MovieList, listener: (MovieList) -> Unit) = with(itemView){
-            Glide.with(itemView.context).load(Constants.IMAGES+movie.backdrop_path).listener(object :
+            Methods.imageUrl(itemView.context, Constants.IMAGES+movie.backdrop_path, movieImage)
+            /*Glide.with(itemView.context).load(Constants.IMAGES+movie.backdrop_path).listener(object :
                 RequestListener<Drawable> {
                 override fun onLoadFailed(p0: GlideException?, p1: Any?, p2: com.bumptech.glide.request.target.Target<Drawable>?, p3: Boolean): Boolean {
                     movieImage.visibility = View.GONE
@@ -38,7 +40,7 @@ class MovieListAdapter(var movieList: ArrayList<MovieList>, private val listener
                     movieImage.visibility = View.VISIBLE
                     return false
                 }
-            }).into(movieImage)
+            }).into(movieImage)*/
             movieTitle.text = movie.title
             movieRate.text = movie.vote_average.toString()
             setOnClickListener {
