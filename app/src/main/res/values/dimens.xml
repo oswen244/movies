@@ -2,5 +2,8 @@
 <resources>
     <dimen name="lil_space">4dp</dimen>
     <dimen name="small_space">8dp</dimen>
+    <dimen name="medium_space">16dp</dimen>
+    <dimen name="big_space">32dp</dimen>
     <dimen name="horizontal_activity_space">16dp</dimen>
+    <dimen name="button_text">16sp</dimen>
 </resources>

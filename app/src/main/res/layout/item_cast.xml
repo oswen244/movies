@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/lil_space"
+    android:layout_height="170dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_photo_camera"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_actor_picture"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_actor_name"
+            style="@style/item_genre_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/lil_space"
+            android:paddingEnd="@dimen/lil_space"
+            android:gravity="center"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginBottom="@dimen/lil_space"
+            app:layout_constraintBottom_toTopOf="@+id/tv_as"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_actor_picture"
+            tools:text="Robert Downey Jr." />
+
+        <TextView
+            android:id="@+id/tv_as"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/as"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_actor_picture"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_character"
+            style="@style/item_genre_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/lil_space"
+            android:paddingEnd="@dimen/lil_space"
+            android:gravity="center"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginTop="@dimen/lil_space"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_actor_picture"
+            app:layout_constraintTop_toBottomOf="@+id/tv_as"
+            tools:text="Ironman" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

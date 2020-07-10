@@ -13,9 +13,9 @@
         android:layout_height="150dp"
         android:background="@color/colorPrimary"
         android:elevation="@dimen/small_space"
-        android:translationZ="@dimen/lil_space"
         android:gravity="center"
         android:text="@string/title_home"
+        android:translationZ="@dimen/lil_space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:listitem="@layout/item_genre"/>
+        tools:listitem="@layout/item_genre" />
 
     <ProgressBar
         android:id="@+id/loader"
@@ -40,12 +40,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <include layout="@layout/layout_empty"
+    <include
         android:id="@+id/layout_empty"
-        android:visibility="gone"/>
+        layout="@layout/layout_empty"
+        android:visibility="gone" />
 
-    <include layout="@layout/layout_error"
+    <include
         android:id="@+id/layout_error"
-        android:visibility="gone"/>
+        layout="@layout/layout_error"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_search_movie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/search_button"
+        android:text="@string/search_movie"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

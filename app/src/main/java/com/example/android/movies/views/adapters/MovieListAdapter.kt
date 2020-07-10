@@ -1,12 +1,17 @@
 package com.example.android.movies.views.adapters
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.example.android.movies.R
 import com.example.android.movies.models.MovieList
 import com.example.android.movies.utils.Constants
@@ -18,9 +23,22 @@ class MovieListAdapter(var movieList: ArrayList<MovieList>, private val listener
         private val movieImage: ImageView = itemView.iv_movie_image
         private val movieTitle: TextView = itemView.tv_movie_title
         private val movieRate: TextView = itemView.tv_movie_rate
+        private val loader: RelativeLayout = itemView.rl_loading_image
 
         fun bind(movie:MovieList, listener: (MovieList) -> Unit) = with(itemView){
-            Glide.with(itemView.context).load(Constants.IMAGES+movie.backdrop_path).into(movieImage)
+            Glide.with(itemView.context).load(Constants.IMAGES+movie.backdrop_path).listener(object :
+                RequestListener<Drawable> {
+                override fun onLoadFailed(p0: GlideException?, p1: Any?, p2: com.bumptech.glide.request.target.Target<Drawable>?, p3: Boolean): Boolean {
+                    movieImage.visibility = View.GONE
+                    loader.visibility = View.VISIBLE
+                    return false
+                }
+                override fun onResourceReady(p0: Drawable?, p1: Any?, p2: com.bumptech.glide.request.target.Target<Drawable>?, p3: DataSource?, p4: Boolean): Boolean {
+                    loader.visibility = View.GONE
+                    movieImage.visibility = View.VISIBLE
+                    return false
+                }
+            }).into(movieImage)
             movieTitle.text = movie.title
             movieRate.text = movie.vote_average.toString()
             setOnClickListener {
@@ -53,5 +71,10 @@ class MovieListAdapter(var movieList: ArrayList<MovieList>, private val listener
         } else {
             notifyItemRangeInserted(prevCount, movies.size)
         }
+    }
+
+    fun clearList(){
+        this.movieList.clear()
+        notifyDataSetChanged()
     }
 }

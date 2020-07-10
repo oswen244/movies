@@ -47,8 +47,12 @@ object ApiClient {
         @GET("discover/movie${APIKEY}")
         suspend fun moviesByGenre(@Query("with_genres") genre_id: String, @Query("page") page: Int): Response<MovieListByGenreResponse>
 
-        @GET("movie/{movie_id}${APIKEY}")
+        @GET("movie/{movie_id}${APIKEY}&append_to_response=credits")
         suspend fun movieDetail(@Path("movie_id") movie_id: Int): Response<MovieDetailResponse>
+
+        @GET("search/movie${APIKEY}")
+        suspend fun searMovie(@Query("query") query: String?, @Query("page") page: Int): Response<MovieListByGenreResponse>
+
     }
 
 }

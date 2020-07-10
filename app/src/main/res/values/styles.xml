@@ -27,7 +27,7 @@
 
     <style name="empty_error_text">
         <item name="fontFamily">sans-serif-condensed-light</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
@@ -66,4 +66,36 @@
         <item name="android:textColor">@color/colorBlackText</item>
     </style>
 
+    <style name="buttons" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/button_text</item>
+    </style>
+
+    <style name="search_button" parent="buttons">
+        <item name="android:paddingStart">@dimen/horizontal_activity_space</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="drawableStartCompat">@drawable/ic_search</item>
+        <item name="android:drawablePadding">@dimen/small_space</item>
+        <item name="android:layout_margin">@dimen/horizontal_activity_space</item>
+    </style>
+
+    <style name="loading_image_movie">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="hint_search_movie_view" parent="empty_error_text">
+        <item name="android:maxLines">2</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="text_release_date">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

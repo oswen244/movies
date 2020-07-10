@@ -7,7 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.movies.bl.IMovieDetailRetrieve
 import com.example.android.movies.data.OperationResult
+import com.example.android.movies.models.MovieCast
+import com.example.android.movies.models.MovieCredits
 import com.example.android.movies.models.MovieDetail
+import com.example.android.movies.models.ProductionCompany
 import com.example.android.movies.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,6 +19,12 @@ import kotlinx.coroutines.withContext
 class MovieDetailViewModel(val repository: IMovieDetailRetrieve): ViewModel() {
     private val _movieDetail = MutableLiveData<MovieDetail>()
     val movieDetail: LiveData<MovieDetail> = _movieDetail
+
+    private val _movieProducers = MutableLiveData<List<ProductionCompany>>().apply { value = emptyList() }
+    val movieProducers: LiveData<List<ProductionCompany>> = _movieProducers
+
+    private val _movieCast = MutableLiveData<List<MovieCast>>().apply { value = emptyList() }
+    val movieCast: MutableLiveData<List<MovieCast>> = _movieCast
 
     private val _isViewLoading=MutableLiveData<Boolean>()
     val isViewLoading:LiveData<Boolean> = _isViewLoading
@@ -31,6 +40,9 @@ class MovieDetailViewModel(val repository: IMovieDetailRetrieve): ViewModel() {
 
     private val _movieRate = MutableLiveData<String>()
     val movieRate: LiveData<String> = _movieRate
+
+    private val _movieReleaseDate = MutableLiveData<String>()
+    val movieReleaseDate: LiveData<String> = _movieReleaseDate
 
     fun loadMovieDetail(movie_id: Int){
         _isViewLoading.postValue(true)
@@ -61,5 +73,8 @@ class MovieDetailViewModel(val repository: IMovieDetailRetrieve): ViewModel() {
         _movieImage.postValue(Constants.IMAGES+movie.backdrop_path)
         _movieOverview.postValue(movie.overview)
         _movieRate.postValue(movie.vote_average.toString())
+        _movieReleaseDate.postValue(movie.release_date)
+        _movieProducers.postValue(movie.production_companies)
+        _movieCast.postValue(movie.credits?.cast)
     }
 }

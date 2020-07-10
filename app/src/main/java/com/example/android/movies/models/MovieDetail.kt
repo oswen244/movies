@@ -12,4 +12,5 @@ data class MovieDetail(val id: Int?,
                        val title: String?,
                        val vote_average: Float?,
                        val homepage: String?,
-                       val production_companies: List<ProductionCompany>?): Parcelable
+                       val production_companies: List<ProductionCompany>?,
+                       val credits: MovieCredits?): Parcelable

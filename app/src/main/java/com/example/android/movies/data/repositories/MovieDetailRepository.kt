@@ -5,6 +5,7 @@ import com.example.android.movies.bl.IMovieDetailRetrieve
 import com.example.android.movies.data.ApiClient
 import com.example.android.movies.data.OperationResult
 import com.example.android.movies.models.MovieDetail
+import com.example.android.movies.utils.Constants
 import com.example.android.movies.utils.fromJson
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

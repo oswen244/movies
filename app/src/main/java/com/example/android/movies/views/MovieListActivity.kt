@@ -25,6 +25,7 @@ class MovieListActivity : AppCompatActivity() {
     private lateinit var adapter: MovieListAdapter
     private lateinit var endlessScrollListener: EndlessScrollViewListener
     private var START_PAGE = 1
+    private var currentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +39,18 @@ class MovieListActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
+        movieListViewModel.currentPage.observe(this, Observer {
+            currentPage = it
+        })
+
         movieListViewModel.movieList.observe(this, Observer {
             binding.layoutEmpty.root.visibility = View.GONE
             binding.layoutError.root.visibility = View.GONE
-            adapter.addToList(it as ArrayList<MovieList>)
+            if(currentPage == START_PAGE){
+                adapter.update(it as ArrayList<MovieList>)
+            }else{
+                adapter.addToList(it as ArrayList<MovieList>)
+            }
         })
 
         movieListViewModel.isViewLoading.observe(this, Observer {
@@ -70,7 +79,7 @@ class MovieListActivity : AppCompatActivity() {
         Methods.setupToolbar(this, binding.include.toolbar, genreName, supportActionBar)
 
         binding.include.toolbar.setNavigationOnClickListener {
-            finish()
+            onBackPressed()
         }
 
         adapter = MovieListAdapter((movieListViewModel.movieList.value as ArrayList<MovieList>?)!!){
@@ -91,6 +100,11 @@ class MovieListActivity : AppCompatActivity() {
         }
         binding.rvMovies.addOnScrollListener(endlessScrollListener)
         binding.rvMovies.adapter = adapter
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)
     }
 
     companion object{

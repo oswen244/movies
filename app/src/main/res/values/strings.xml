@@ -5,4 +5,9 @@
     <string name="empty_list_movies">No hay Peliculas para mostrar</string>
     <string name="error_list_genre">Hubo un error al cargar la lista</string>
     <string name="about_the_movie">Overview</string>
+    <string name="search_movie">Search Movie</string>
+    <string name="search_movie_hint">Search your favorite movie\nby typing in the box</string>
+    <string name="producer">Producer</string>
+    <string name="as">As</string>
+    <string name="cast">Cast</string>
 </resources>

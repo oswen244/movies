@@ -12,6 +12,29 @@
         android:layout_height="match_parent"
         android:background="?selectableItemBackground">
 
+        <RelativeLayout
+            android:id="@+id/rl_loading_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                style="@style/loading_image_movie"
+                android:text="M"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+
         <ImageView
             android:id="@+id/iv_movie_image"
             android:layout_width="match_parent"
@@ -20,8 +43,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_background" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_movie_title"

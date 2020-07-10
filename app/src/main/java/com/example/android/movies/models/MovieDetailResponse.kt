@@ -13,5 +13,6 @@ data class MovieDetailResponse(val id: Int,
                                val vote_average: Float?,
                                val homepage: String?,
                                val production_companies: List<ProductionCompany>?,
+                               val credits: MovieCredits?,
                                val status_code: Int?,
                                val status_message: String?): Parcelable

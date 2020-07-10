@@ -11,18 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty_list_genre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_warning"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_empty_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_empty_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

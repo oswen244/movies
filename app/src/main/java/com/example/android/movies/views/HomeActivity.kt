@@ -10,6 +10,7 @@ import com.example.android.movies.databinding.ActivityMainBinding
 import com.example.android.movies.viewmodels.GenreViewModel
 import com.example.android.movies.views.adapters.GenreAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.lang.System.exit
 
 class HomeActivity : AppCompatActivity() {
 
@@ -60,10 +61,20 @@ class HomeActivity : AppCompatActivity() {
         }
         binding.rvMoviesGenres.layoutManager = LinearLayoutManager(this)
         binding.rvMoviesGenres.adapter = adapter
+
+        binding.btnSearchMovie.setOnClickListener {
+            openMovieSearch()
+        }
     }
 
     private fun openListByGenre(genreId: String, genreName: String){
         val intent = MovieListActivity.newInstance(this, genreId, genreName)
+        startActivity(intent)
+        overridePendingTransition(R.anim.enter, R.anim.exit)
+    }
+
+    private fun openMovieSearch(){
+        val intent = SearchMovieActivity.newInstance(this)
         startActivity(intent)
     }
 
