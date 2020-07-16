@@ -1,16 +1,16 @@
 package com.example.android.movies.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.movies.R
 import com.example.android.movies.databinding.ActivityMainBinding
 import com.example.android.movies.viewmodels.GenreViewModel
 import com.example.android.movies.views.adapters.GenreAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.lang.System.exit
 
 class HomeActivity : AppCompatActivity() {
 
@@ -65,6 +65,20 @@ class HomeActivity : AppCompatActivity() {
         binding.btnSearchMovie.setOnClickListener {
             openMovieSearch()
         }
+
+        binding.rvMoviesGenres.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                binding.btnSearchMovie.extend()
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy != 0){
+                    binding.btnSearchMovie.shrink()
+                }
+            }
+        })
     }
 
     private fun openListByGenre(genreId: String, genreName: String){

@@ -50,13 +50,13 @@
         layout="@layout/layout_error"
         android:visibility="gone" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btn_search_movie"
+        style="@style/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/search_button"
         android:text="@string/search_movie"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
