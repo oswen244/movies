@@ -44,6 +44,9 @@ ext {
     lifecycleKtxVersion = '2.2.0'
     viewmodelKtxVersion = '2.2.0'
     lottieVersion = '3.4.1'
+    mockito = '2.27.0'
+    arch_core = "2.1.0"
+    runnerVersion = '1.0.1'
 
     gsonVersion='2.8.0'
     retrofit2='2.6.0'

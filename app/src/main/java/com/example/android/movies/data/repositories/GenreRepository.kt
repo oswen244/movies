@@ -8,7 +8,7 @@ import com.example.android.movies.bl.IMoviesGenresRetrieve
 import java.lang.Exception
 
 class GenreRepository: IMoviesGenresRetrieve {
-    override suspend fun retrieveMuseums(): OperationResultList<Genre> {
+    override suspend fun retrieveGenres(): OperationResultList<Genre> {
         try {
             val response = ApiClient.build()?.genres()
             response?.let {

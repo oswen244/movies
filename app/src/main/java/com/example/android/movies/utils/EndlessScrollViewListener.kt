@@ -24,9 +24,8 @@ abstract class EndlessScrollViewListener(val layoutManager: LinearLayoutManager,
     }
 
     override fun onScrolled(view: RecyclerView, dx: Int, dy: Int) {
-        var lastVisibleItemPosition = 0
         val totalItemCount = layoutManager.itemCount
-        lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+        val lastVisibleItemPosition: Int = layoutManager.findLastVisibleItemPosition()
 
         if (totalItemCount < previousTotalItemCount) {
             this.currentPage = this.startingPageIndex

@@ -29,7 +29,7 @@ class GenreViewModel(private val repository: IMoviesGenresRetrieve): ViewModel()
         _isViewLoading.postValue(true)
         viewModelScope.launch {
             val resultList: OperationResultList<Genre> = withContext(Dispatchers.IO){
-                repository.retrieveMuseums()
+                repository.retrieveGenres()
             }
             _isViewLoading.postValue(false)
             when(resultList){
