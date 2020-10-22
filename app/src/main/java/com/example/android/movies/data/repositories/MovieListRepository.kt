@@ -11,9 +11,9 @@ import java.lang.Exception
 
 class MovieListRepository: IMovieRetrieve {
 
-    override suspend fun retrieveMovies(genreId: String, page: Int): OperationResult<MovieListByGenreResponse> {
+    override suspend fun retrieveMovies(genreId: String, sort: String, page: Int): OperationResult<MovieListByGenreResponse> {
         try {
-            val response = ApiClient.build()?.moviesByGenre(genreId, page)
+            val response = ApiClient.build()?.moviesByGenre(genreId, sort, page)
             response?.let {
                 return if (it.isSuccessful && it.body() != null) {
                     val data = it.body()

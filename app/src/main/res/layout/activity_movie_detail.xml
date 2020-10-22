@@ -106,6 +106,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_about"
                 tools:text="As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain." />
 
+            <TextView
+                android:id="@+id/url_homepage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/horizontal_activity_space"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_overview"
+                tools:text="https://homepage.com" />
+
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
@@ -114,7 +124,7 @@
                 android:background="@color/colorGrayText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_overview" />
+                app:layout_constraintTop_toBottomOf="@+id/url_homepage" />
 
             <TextView
                 android:id="@+id/textView3"

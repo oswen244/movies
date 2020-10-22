@@ -6,5 +6,5 @@ import com.example.android.movies.models.MovieList
 import com.example.android.movies.models.MovieListByGenreResponse
 
 interface IMovieRetrieve {
-    suspend fun retrieveMovies(genreId: String, page: Int): OperationResult<MovieListByGenreResponse>
+    suspend fun retrieveMovies(genreId: String, sort: String, page: Int): OperationResult<MovieListByGenreResponse>
 }

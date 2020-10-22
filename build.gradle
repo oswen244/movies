@@ -8,7 +8,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -47,6 +47,7 @@ ext {
     mockito = '2.27.0'
     arch_core = "2.1.0"
     runnerVersion = '1.0.1'
+    browser = '1.2.0'
 
     gsonVersion='2.8.0'
     retrofit2='2.6.0'

@@ -33,11 +33,11 @@ class MovieListViewModel(private val repository: IMovieRetrieve): ViewModel() {
     private val _currentPage = MutableLiveData<Int>()
     val currentPage: LiveData<Int> = _currentPage
 
-    fun loadMoviesByGenre(genreId: String, page: Int){
+    fun loadMoviesByGenre(genreId: String, sort: String, page: Int){
         _isViewLoading.postValue(true)
         viewModelScope.launch {
             val resultList: OperationResult<MovieListByGenreResponse> = withContext(Dispatchers.IO){
-                repository.retrieveMovies(genreId, page)
+                repository.retrieveMovies(genreId, sort, page)
             }
             _isViewLoading.postValue(false)
             when(resultList){

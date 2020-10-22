@@ -68,6 +68,7 @@
 
     <style name="buttons" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:background">@drawable/button_background</item>
+        <item name="backgroundTint">@color/colorAccent</item>
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/button_text</item>
@@ -101,5 +102,9 @@
     <style name="text_release_date">
         <item name="fontFamily">sans-serif-light</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="linkHomePage">
+
     </style>
 </resources>

@@ -11,4 +11,17 @@
     <string name="as">As</string>
     <string name="cast">Cast</string>
     <string name="rate_default">0.0</string>
+    <string name="sort_by">Ordenar por:</string>
+    <string name="popularity">Popularidad descendente</string>
+    <string name="release_date">Fecha de lanzamiento descendente</string>
+    <string name="rating">Calificación descendente</string>
+    <string name="Ok">Listo</string>
+
+<!--    SortMovies-->
+    <string name="popularityAsc">popularity.asc</string>
+    <string name="releaseDateAsc">release_date.asc</string>
+    <string name="voteAverageAsc">vote_average.asc</string>
+    <string name="popularityDesc">popularity.desc</string>
+    <string name="releaseDateDesc">release_date.desc</string>
+    <string name="voteAverageDesc">vote_average.desc</string>
 </resources>

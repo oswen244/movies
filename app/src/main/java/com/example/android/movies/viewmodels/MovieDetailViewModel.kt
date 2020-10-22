@@ -44,6 +44,9 @@ class MovieDetailViewModel(val repository: IMovieDetailRetrieve): ViewModel() {
     private val _movieReleaseDate = MutableLiveData<String>()
     val movieReleaseDate: LiveData<String> = _movieReleaseDate
 
+    private val _urlHomepage = MutableLiveData<String>()
+    val urlHomepage: LiveData<String> = _urlHomepage
+
     fun loadMovieDetail(movie_id: Int){
         _isViewLoading.postValue(true)
         viewModelScope.launch {
@@ -76,5 +79,6 @@ class MovieDetailViewModel(val repository: IMovieDetailRetrieve): ViewModel() {
         _movieReleaseDate.postValue(movie.release_date)
         _movieProducers.postValue(movie.production_companies)
         _movieCast.postValue(movie.credits?.cast)
+        _urlHomepage.postValue(movie.homepage)
     }
 }

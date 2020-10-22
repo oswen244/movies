@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.LayoutAnimationController
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,12 +14,14 @@ import com.example.android.movies.R
 import com.example.android.movies.databinding.ActivityMovieListBinding
 import com.example.android.movies.models.MovieList
 import com.example.android.movies.utils.EndlessScrollViewListener
+import com.example.android.movies.utils.ISortBy
 import com.example.android.movies.utils.Methods
 import com.example.android.movies.viewmodels.MovieListViewModel
 import com.example.android.movies.views.adapters.MovieListAdapter
+import com.example.android.movies.views.fragments.SortDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MovieListActivity : AppCompatActivity() {
+class MovieListActivity : AppCompatActivity(), ISortBy {
 
     private lateinit var binding: ActivityMovieListBinding
     private val movieListViewModel: MovieListViewModel by viewModel<MovieListViewModel>()
@@ -26,6 +29,7 @@ class MovieListActivity : AppCompatActivity() {
     private lateinit var endlessScrollListener: EndlessScrollViewListener
     private var START_PAGE = 1
     private var currentPage = 0
+    private lateinit var sortType: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +38,8 @@ class MovieListActivity : AppCompatActivity() {
 
         setupObservers()
         setupUI()
-
-        movieListViewModel.loadMoviesByGenre(genreId, START_PAGE)
+        sortType = getString(R.string.popularityDesc)
+        movieListViewModel.loadMoviesByGenre(genreId, sortType,  START_PAGE)
     }
 
     private fun setupObservers() {
@@ -94,12 +98,16 @@ class MovieListActivity : AppCompatActivity() {
         endlessScrollListener = object : EndlessScrollViewListener(layoutManager, START_PAGE){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 if(page <= movieListViewModel.maxPages.value!!){
-                    movieListViewModel.loadMoviesByGenre(genreId, page)
+                    movieListViewModel.loadMoviesByGenre(genreId, sortType, page)
                 }
             }
         }
         binding.rvMovies.addOnScrollListener(endlessScrollListener)
         binding.rvMovies.adapter = adapter
+
+        binding.ivSort.setOnClickListener {
+            SortDialogFragment.newInstance().show(supportFragmentManager, SortDialogFragment.TAG)
+        }
     }
 
     override fun onBackPressed() {
@@ -115,5 +123,10 @@ class MovieListActivity : AppCompatActivity() {
             this.genreName = genreName
             return Intent(context, MovieListActivity::class.java)
         }
+    }
+
+    override fun sortBy(key: String) {
+        sortType = key
+        movieListViewModel.loadMoviesByGenre(genreId, sortType, START_PAGE)
     }
 }
