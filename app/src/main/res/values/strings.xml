@@ -24,4 +24,6 @@
     <string name="popularityDesc">popularity.desc</string>
     <string name="releaseDateDesc">release_date.desc</string>
     <string name="voteAverageDesc">vote_average.desc</string>
+    <string name="rate_zero">0.0</string>
+    <string name="movie_search_title">Movie search</string>
 </resources>

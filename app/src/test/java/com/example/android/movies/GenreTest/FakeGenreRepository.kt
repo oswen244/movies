@@ -1,8 +1,8 @@
 package com.example.android.movies.GenreTest
 
-import com.example.android.movies.bl.IMoviesGenresRetrieve
+import com.example.android.movies.data.bl.IMoviesGenresRetrieve
 import com.example.android.movies.data.OperationResultList
-import com.example.android.movies.models.Genre
+import com.example.android.movies.data.models.Genre
 
 class FakeGenreRepository: IMoviesGenresRetrieve {
 
