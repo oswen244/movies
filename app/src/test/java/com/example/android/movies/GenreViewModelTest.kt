@@ -8,8 +8,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.android.movies.GenreTest.FakeGenreRepository
 import com.example.android.movies.data.OperationResultList
-import com.example.android.movies.models.Genre
-import com.example.android.movies.viewmodels.GenreViewModel
+import com.example.android.movies.data.models.Genre
+import com.example.android.movies.app.viewmodels.GenreViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
