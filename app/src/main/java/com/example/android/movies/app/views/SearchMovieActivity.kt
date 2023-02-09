@@ -17,7 +17,7 @@ import com.example.android.movies.databinding.ActivitySearchMovieBinding
 import com.example.android.movies.utils.EndlessScrollViewListener
 import com.example.android.movies.utils.Methods
 import com.movies.core.domain.entity.MovieEntity
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchMovieActivity : AppCompatActivity() {
 

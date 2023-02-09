@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -18,7 +17,7 @@ import com.example.android.movies.utils.Methods
 import com.example.android.movies.app.viewmodels.MovieDetailViewModel
 import com.example.android.movies.app.views.adapters.MovieCastAdapter
 import com.example.android.movies.app.views.adapters.ProducersAdapter
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailActivity : AppCompatActivity() {
 

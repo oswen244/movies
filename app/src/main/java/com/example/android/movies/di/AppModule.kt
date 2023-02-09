@@ -11,7 +11,7 @@ import com.movies.core.domain.interactor.MoviesInteractor
 import com.movies.core.domain.repository.MovieRepository
 import com.movies.core.support.DispatcherProvider
 import com.movies.core.support.DispatcherProviderImp
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 

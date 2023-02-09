@@ -2,25 +2,25 @@ package com.example.android.movies.app.views
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.movies.R
 import com.example.android.movies.app.model.state.MovieListState
+import com.example.android.movies.app.viewmodels.MovieListViewModel
+import com.example.android.movies.app.views.adapters.MovieListAdapter
+import com.example.android.movies.app.views.fragments.SortDialogFragment
 import com.example.android.movies.databinding.ActivityMovieListBinding
 import com.example.android.movies.utils.EndlessScrollViewListener
 import com.example.android.movies.utils.ISortBy
 import com.example.android.movies.utils.Methods
-import com.example.android.movies.app.viewmodels.MovieListViewModel
-import com.example.android.movies.app.views.adapters.MovieListAdapter
-import com.example.android.movies.app.views.fragments.SortDialogFragment
 import com.movies.core.domain.entity.MovieEntity
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("DEPRECATION")
 class MovieListActivity : AppCompatActivity(), ISortBy {
 
     private lateinit var binding: ActivityMovieListBinding
@@ -43,20 +43,20 @@ class MovieListActivity : AppCompatActivity(), ISortBy {
     }
 
     private fun setupObservers() {
-        movieListViewModel.currentPage.observe(this, Observer {
+        movieListViewModel.currentPage.observe(this) {
             currentPage = it
-        })
+        }
 
-        movieListViewModel.movieList.observe(this, Observer {
+        movieListViewModel.movieList.observe(this) {
             binding.layoutEmpty.root.visibility = View.GONE
             binding.layoutError.root.visibility = View.GONE
             binding.loader.visibility = View.GONE
-            if(currentPage == START_PAGE){
+            if (currentPage == START_PAGE) {
                 adapter.update(it as ArrayList<MovieEntity>)
-            }else{
+            } else {
                 adapter.addToList(it as ArrayList<MovieEntity>)
             }
-        })
+        }
 
         movieListViewModel.state.observe(this){ state ->
             binding.loader.visibility = View.GONE
@@ -108,6 +108,7 @@ class MovieListActivity : AppCompatActivity(), ISortBy {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)

@@ -11,7 +11,7 @@ import com.example.android.movies.app.model.state.GenresState
 import com.example.android.movies.databinding.ActivityMainBinding
 import com.example.android.movies.app.viewmodels.GenreViewModel
 import com.example.android.movies.app.views.adapters.GenreAdapter
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
 
