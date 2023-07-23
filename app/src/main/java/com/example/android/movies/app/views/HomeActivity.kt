@@ -4,19 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.android.movies.R
 import com.example.android.movies.app.model.state.GenresState
-import com.example.android.movies.databinding.ActivityMainBinding
 import com.example.android.movies.app.viewmodels.GenreViewModel
-import com.example.android.movies.app.views.adapters.GenreAdapter
+import com.example.android.movies.app.views.composables.GenreList
+import com.example.android.movies.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter: GenreAdapter
     private val genreViewModel: GenreViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +31,11 @@ class HomeActivity : AppCompatActivity() {
             binding.layoutEmpty.apply { View.GONE }
             binding.layoutError.apply { View.GONE }
             binding.loader.visibility = View.GONE
-            adapter.updateList(it)
+            binding.llMoviesGenres.setContent {
+                GenreList(items = it) { id, name ->
+                    openListByGenre(id, name)
+                }
+            }
         })
 
         genreViewModel.isEmptyList.observe(this, Observer {
@@ -66,29 +67,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        adapter = GenreAdapter(genreViewModel.genreList.value!!){
-            openListByGenre(it.id.toString(), it.name)
-        }
-        binding.rvMoviesGenres.layoutManager = LinearLayoutManager(this)
-        binding.rvMoviesGenres.adapter = adapter
-
         binding.btnSearchMovie.setOnClickListener {
             openMovieSearch()
         }
-
-        binding.rvMoviesGenres.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                binding.btnSearchMovie.extend()
-            }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if(dy != 0){
-                    binding.btnSearchMovie.shrink()
-                }
-            }
-        })
     }
 
     private fun openListByGenre(genreId: String, genreName: String){
