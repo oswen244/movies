@@ -7,4 +7,5 @@
     <dimen name="horizontal_activity_space">16dp</dimen>
     <dimen name="button_text">16sp</dimen>
     <dimen name="button_width">150dp</dimen>
+    <dimen name="top_bar_home_dimen">150dp</dimen>
 </resources>

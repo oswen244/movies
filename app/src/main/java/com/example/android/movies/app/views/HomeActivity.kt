@@ -7,7 +7,9 @@ import androidx.lifecycle.Observer
 import com.example.android.movies.R
 import com.example.android.movies.app.model.state.GenresState
 import com.example.android.movies.app.viewmodels.GenreViewModel
+import com.example.android.movies.app.views.composables.ExtendedFloatingActionButtonSearch
 import com.example.android.movies.app.views.composables.GenreList
+import com.example.android.movies.app.views.composables.HomeTopBar
 import com.example.android.movies.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -67,8 +69,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        binding.btnSearchMovie.setOnClickListener {
-            openMovieSearch()
+        binding.topBarHome.setContent {
+            HomeTopBar()
+        }
+        binding.btnSearchMovie.setContent {
+            ExtendedFloatingActionButtonSearch {
+                openMovieSearch()
+            }
         }
     }
 

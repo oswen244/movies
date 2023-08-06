@@ -6,29 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".app.views.HomeActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/home_title_text"
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/top_bar_home"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/colorPrimary"
-        android:elevation="@dimen/small_space"
-        android:gravity="center"
-        android:text="@string/title_home"
-        android:translationZ="@dimen/lil_space"
+        android:layout_height="@dimen/top_bar_home_dimen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--<androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movies_genres"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:listitem="@layout/item_genre" />-->
 
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/ll_movies_genres"
@@ -37,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_home"/>
 
     <ProgressBar
         android:id="@+id/loader"
@@ -47,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_home" />
 
     <include
         android:id="@+id/layout_empty"
@@ -59,12 +43,10 @@
         layout="@layout/layout_error"
         android:visibility="gone" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <androidx.compose.ui.platform.ComposeView
         android:id="@+id/btn_search_movie"
-        style="@style/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search_movie"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
