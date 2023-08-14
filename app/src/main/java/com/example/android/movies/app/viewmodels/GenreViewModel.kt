@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.android.movies.app.model.state.GenresState
 import com.example.android.movies.app.model.state.GenresState.LoadingErrorState
 import com.example.android.movies.app.model.state.GenresState.LoadingState
+import com.example.android.movies.app.model.state.GenresState.SuccessState
 import com.example.android.movies.app.support.BaseViewModel
 import com.example.android.movies.app.support.asLiveData
 import com.movies.core.domain.entity.GenreEntity
@@ -21,9 +22,6 @@ class GenreViewModel(private val movieInteractor: MoviesInteractor,
     private val _isViewLoading = MutableLiveData<Boolean>()
     val isViewLoading = _isViewLoading.asLiveData()
 
-    private val _onMessageError=MutableLiveData<Any>()
-    val onMessageError = _onMessageError.asLiveData()
-
     private val _isEmptyList=MutableLiveData<Boolean>()
     val isEmptyList = _isEmptyList.asLiveData()
 
@@ -38,10 +36,12 @@ class GenreViewModel(private val movieInteractor: MoviesInteractor,
         setState(LoadingState)
         when(val response = movieInteractor.getGenres()){
             is Success -> {
-                if(response.data.isNullOrEmpty()){
+                if(response.data.isEmpty()){
                     _isEmptyList.postValue(true)
+                    setState(LoadingErrorState)
                 }else{
                     _genreList.value = response.data
+                    setState(SuccessState)
                 }
             }
 

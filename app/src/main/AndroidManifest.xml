@@ -11,14 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.android.movies.app.views.SearchMovieActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.example.android.movies.app.views.SplashActivity"
+            android:name=".app.views.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".app.views.SearchMovieActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".app.views.SplashActivity"
+            android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,15 +32,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.android.movies.app.views.MovieDetailActivity"
+            android:name=".app.views.MovieDetailActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.android.movies.app.views.MovieListActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.example.android.movies.app.views.HomeActivity"
+            android:name=".app.views.MovieListActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

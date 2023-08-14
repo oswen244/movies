@@ -28,7 +28,8 @@ fun HomeTopBar(){
     ) {
         Box(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .height(180.dp)
                 .clip(shape = RoundedCornerShape(0.dp, 0.dp, 8.dp, 8.dp))
                 .background(colorResource(id = R.color.colorPrimary))
         ) {

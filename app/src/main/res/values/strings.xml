@@ -17,7 +17,7 @@
     <string name="rating">Calificación descendente</string>
     <string name="Ok">Listo</string>
 
-<!--    SortMovies-->
+    <!--    SortMovies-->
     <string name="popularityAsc">popularity.asc</string>
     <string name="releaseDateAsc">release_date.asc</string>
     <string name="voteAverageAsc">vote_average.asc</string>
@@ -26,4 +26,5 @@
     <string name="voteAverageDesc">vote_average.desc</string>
     <string name="rate_zero">0.0</string>
     <string name="movie_search_title">Movie search</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
