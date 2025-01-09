@@ -18,6 +18,7 @@ import java.util.*
 
 object Methods {
 
+    const val defaultRate = "0.0"
     fun setupToolbar(context: Context, toolbar: Toolbar, titleText: String, supportActionBar: ActionBar?){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -33,15 +34,26 @@ object Methods {
     }
 
     fun formatDate(date: String): String{
-        val formatted: String
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val dateTest = LocalDate.parse(date)
-            val formatter = DateTimeFormatter.ofPattern("d MMM yyyy")
-            formatted = dateTest.format(formatter)
-        }else{
-            val dateFormat = SimpleDateFormat("d MMM yyyy")
-            formatted = dateFormat.format(date)
+        var formatted = ""
+        if(date.isNotEmpty()){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val dateTest = LocalDate.parse(date)
+                val formatter = DateTimeFormatter.ofPattern("d MMM yyyy")
+                formatted = dateTest.format(formatter)
+            }else{
+                val dateFormat = SimpleDateFormat("d MMM yyyy")
+                formatted = dateFormat.format(date)
+            }
         }
         return formatted
+    }
+
+    fun getRate(rate: String): String{
+        return if(rate.isNotEmpty()){
+            val dividedRate = rate.split(".")
+            dividedRate[0] + "." + dividedRate[1].take(1)
+        }else{
+            defaultRate
+        }
     }
 }

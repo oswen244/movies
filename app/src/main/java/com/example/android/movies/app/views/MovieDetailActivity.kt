@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.android.movies.R
 import com.example.android.movies.databinding.ActivityMovieDetailBinding
 import com.example.android.movies.utils.Methods
@@ -60,10 +61,10 @@ class MovieDetailActivity : AppCompatActivity() {
                 Glide.with(this).load(it).listener(object :
                     RequestListener<Drawable> {
                     override fun onLoadFailed(
-                        p0: GlideException?,
-                        p1: Any?,
-                        p2: com.bumptech.glide.request.target.Target<Drawable>?,
-                        p3: Boolean
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>,
+                        isFirstResource: Boolean
                     ): Boolean {
                         binding.ivMovieImageBackground.visibility = View.GONE
                         binding.rlLoadingImage.visibility = View.VISIBLE
@@ -71,11 +72,11 @@ class MovieDetailActivity : AppCompatActivity() {
                     }
 
                     override fun onResourceReady(
-                        p0: Drawable?,
-                        p1: Any?,
-                        p2: com.bumptech.glide.request.target.Target<Drawable>?,
-                        p3: DataSource?,
-                        p4: Boolean
+                        resource: Drawable,
+                        model: Any,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource,
+                        isFirstResource: Boolean
                     ): Boolean {
                         binding.rlLoadingImage.visibility = View.GONE
                         binding.ivMovieImageBackground.visibility = View.VISIBLE

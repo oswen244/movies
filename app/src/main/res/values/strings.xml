@@ -27,4 +27,5 @@
     <string name="rate_zero">0.0</string>
     <string name="movie_search_title">Movie search</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_movie_detail_v2">MovieDetailV2Activity</string>
 </resources>

@@ -85,7 +85,8 @@ class MovieListActivity : AppCompatActivity(), ISortBy {
         }
 
         adapter = MovieListAdapter((movieListViewModel.movieList.value as ArrayList<MovieEntity>)){
-            val intent = MovieDetailActivity.newInstance(this, it.title.orEmpty(), it.id)
+            // val intent = MovieDetailActivity.newInstance(this, it.title.orEmpty(), it.id)
+            val intent = MovieDetailV2Activity.newInstance(this, it.title.orEmpty(), it.id)
             startActivity(intent)
         }
 

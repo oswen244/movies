@@ -5,12 +5,17 @@
 
     <application
         android:name=".KApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".app.views.MovieDetailV2Activity"
+            android:exported="false"
+            android:label="@string/title_activity_movie_detail_v2"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".app.views.MainActivity"
             android:exported="false"

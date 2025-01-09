@@ -29,8 +29,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_19
+        targetCompatibility JavaVersion.VERSION_19
     }
 
 
@@ -44,7 +44,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_19.toString()
     }
 
     namespace 'com.example.android.movies'
@@ -60,7 +60,7 @@ dependencies {
     //Core module
     implementation project(':core')
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation 'androidx.activity:activity-compose:1.3.0'
     implementation 'androidx.compose.material:material:1.2.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
 
@@ -70,23 +70,18 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.core:core-ktx:$androidXVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.cardview:cardview:$cardViewVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation 'com.github.bumptech.glide:compose:1.0.0-beta01'
 
     // Gson
     implementation "com.google.code.gson:gson:$rootProject.gson"
 
-    // Koin
-    implementation "io.insert-koin:koin-android:$rootProject.koinVersion"
-
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Lifecycle
@@ -116,14 +111,14 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     debugImplementation 'androidx.compose.ui:ui-tooling'
 
+    // Koin
+    implementation "io.insert-koin:koin-android:$rootProject.koinVersion"
+
     // Testing
-    testImplementation 'junit:junit:4.12'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.0'
     testImplementation "org.mockito:mockito-core:$rootProject.mockito"
 
     androidTestImplementation "androidx.test:runner:$rootProject.runnerVersion"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockito"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 }
