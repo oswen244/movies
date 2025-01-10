@@ -3,9 +3,8 @@ package com.example.android.movies.app.viewmodels
 import androidx.lifecycle.MutableLiveData
 import com.example.android.movies.app.model.state.MovieDetailState
 import com.example.android.movies.app.model.state.MovieDetailState.LoadingErrorMovieData
-import com.example.android.movies.app.model.state.MovieDetailState.LoadingMovieData
-import com.example.android.movies.app.support.BaseViewModel
-import com.example.android.movies.app.support.asLiveData
+import com.example.android.movies.app.base.BaseViewModel
+import com.example.android.movies.utils.asLiveData
 import com.example.android.movies.utils.Constants
 import com.movies.core.domain.entity.MovieCastEntity
 import com.movies.core.domain.entity.MovieEntity

@@ -15,7 +15,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.android.movies.R
@@ -23,10 +22,14 @@ import com.example.android.movies.app.viewmodels.MovieDetailViewModel
 import com.example.android.movies.app.views.composables.OverViewMovie
 import com.example.android.movies.app.views.composables.RateComponent
 import com.example.android.movies.app.views.composables.TopAppBarTransparent
+import com.example.android.movies.app.views.ui.theme.Dimens.DP_8
 import com.example.android.movies.app.views.ui.theme.MoviesTheme
 import com.example.android.movies.utils.Methods.formatDate
 import com.example.android.movies.utils.Methods.getRate
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
+const val MOVIE_ID = "movie_id"
+const val MOVIE_NAME = "movie_name"
 
 @OptIn(ExperimentalGlideComposeApi::class)
 class MovieDetailV2Activity : ComponentActivity() {
@@ -35,6 +38,7 @@ class MovieDetailV2Activity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             MoviesTheme {
                 // A surface container using the 'background' color from the theme
@@ -46,11 +50,19 @@ class MovieDetailV2Activity : ComponentActivity() {
                 }
             }
         }
-        movieId?.let { movieDetailViewModel.loadMovieDetail(it) }
+        getMovieDetail()
     }
+
+    private fun getMovieDetail() {
+        intent.getIntExtra(MOVIE_ID, 0).let {
+            movieDetailViewModel.loadMovieDetail(it)
+        }
+    }
+
 
     @Composable
     fun MovieDetailView(){
+        val movieName = intent.getStringExtra(MOVIE_NAME).orEmpty()
         val image = movieDetailViewModel.movieImage.observeAsState()
         val rate = movieDetailViewModel.movieRate.observeAsState()
         val releaseDate = movieDetailViewModel.movieReleaseDate.observeAsState()
@@ -76,14 +88,14 @@ class MovieDetailV2Activity : ComponentActivity() {
                     }
                     RateComponent(
                         modifier = Modifier
-                            .padding(8.dp)
+                            .padding(DP_8)
                             .align(Alignment.BottomEnd),
                         rate = getRate(rate.value.orEmpty())
                     )
                 }
                 OverViewMovie(
                     modifier = Modifier.fillMaxWidth()
-                        .padding(8.dp),
+                        .padding(DP_8),
                     releaseData = formatDate(releaseDate.value.orEmpty()),
                     overView = overview.value.orEmpty(),
                     url = url.value.orEmpty()
@@ -97,12 +109,11 @@ class MovieDetailV2Activity : ComponentActivity() {
     }
 
     companion object{
-        lateinit var movieName: String
-        var movieId: Int? = 0
         fun newInstance(context: Context, movieName: String?, movieId: Int?): Intent {
-            this.movieName = movieName.orEmpty()
-            this.movieId = movieId
-            return Intent(context, MovieDetailV2Activity::class.java)
+            return Intent(context, MovieDetailV2Activity::class.java).apply {
+                putExtra(MOVIE_NAME, movieName)
+                putExtra(MOVIE_ID, movieId)
+            }
         }
     }
 }

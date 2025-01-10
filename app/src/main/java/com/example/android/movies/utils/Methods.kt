@@ -3,7 +3,6 @@ package com.example.android.movies.utils
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
-import android.icu.util.LocaleData
 import android.os.Build
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
@@ -12,9 +11,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 object Methods {
 

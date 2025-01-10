@@ -1,6 +1,5 @@
-package com.example.android.movies.app.support
+package com.example.android.movies.app.base
 
-import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.movies.core.support.DispatcherProvider
@@ -13,14 +12,4 @@ abstract class BaseViewModel(private val appDispatcher: DispatcherProvider): Vie
         dispatcher: CoroutineDispatcher = appDispatcher.main,
         action: suspend () -> Unit
     ) = viewModelScope.launch(dispatcher) { action() }
-
-    protected fun observer(
-        dispatcher: CoroutineDispatcher = appDispatcher.main,
-        observer: suspend () -> Unit
-     ) = viewModelScope.launch(dispatcher) { observer.invoke() }
-
-    open fun onSaveInstanceState() = Bundle()
-
-    open fun onRestoreInstanceState(savedInstanceState: Bundle) {}
-
 }

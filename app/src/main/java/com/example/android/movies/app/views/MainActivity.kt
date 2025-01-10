@@ -3,7 +3,6 @@ package com.example.android.movies.app.views
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,10 +10,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import com.example.android.movies.R
-import com.example.android.movies.app.model.state.GenresState
 import com.example.android.movies.app.viewmodels.GenreViewModel
 import com.example.android.movies.app.views.composables.CircularProgressBar
 import com.example.android.movies.app.views.composables.ExtendedFloatingActionButtonSearch
@@ -22,6 +19,7 @@ import com.example.android.movies.app.views.composables.GenreItem
 import com.example.android.movies.app.views.composables.HomeTopBar
 import com.example.android.movies.app.views.ui.theme.MoviesTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.compose.foundation.lazy.items
 
 class MainActivity : ComponentActivity() {
 
@@ -36,10 +34,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column {
-                        HomeTopBar()
+                        HomeTopBar(getString(R.string.title_home), R.drawable.ic_round_movie)
                         GetGenreList()
                     }
-                    ExtendedFloatingActionButtonSearch {
+                    ExtendedFloatingActionButtonSearch(
+                        getString(R.string.search_movie)
+                    ) {
                         openMovieSearch()
                     }
                 }
@@ -50,24 +50,16 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun GetGenreList(){
-        val list = genreViewModel.genreList.observeAsState()
-        val loading = genreViewModel.state.observeAsState()
-        list.value?.let {
-            Box(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    state = rememberLazyListState(),
-                    content = {
-                        items(count = it.size) {index ->
-                            GenreItem(data = it[index]){ id, name ->
-                                openListByGenre(id, name)
-                            }
-                        }
-                    }
-                )
-                CircularProgressBar(isDisplayed = loading.value is GenresState.LoadingState)
+        val viewState = genreViewModel.viewState
+        CircularProgressBar(isDisplayed = viewState.loading)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            state = rememberLazyListState(),
+        ){
+            items(items = viewState.genreList) { item ->
+                GenreItem(data = item){ id, name ->
+                    openListByGenre(id, name)
+                }
             }
         }
     }
